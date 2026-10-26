@@ -1,0 +1,4 @@
+_base: base.yaml
+experiment: dubai_rgb
+data:
+  features: [rgb]

@@ -1,0 +1,33 @@
+seed: 42
+experiment: base
+output_dir: runs
+
+data:
+  processed_dir: data/processed/dubai
+  window: 256
+  samples_per_epoch: 1000
+  features: [rgb]
+  # ВАЖНО: тайлы нужно выбрать по таблице, которую печатает prepare_dubai (доли классов по тайлам).
+  # Разбиение идёт ПО ТАЙЛАМ, а не по окнам: окна одного тайла почти одинаковы, иначе будет утечка.
+  train_tiles: [Tile_1, Tile_2, Tile_3, Tile_4, Tile_5]
+  val_tiles: [Tile_6]
+  test_tiles: [Tile_7, Tile_8]
+
+model:
+  arch: smp_unet          # unet (свой, base_channels) | smp_unet (предобученный энкодер)
+  encoder: resnet34
+  encoder_weights: imagenet
+  base_channels: 32       # только для arch: unet
+
+train:
+  epochs: 40
+  batch_size: 16
+  lr: 3.0e-4
+  weight_decay: 1.0e-4
+  num_workers: 2
+  patience: 10
+
+loss:
+  ce: 1.0
+  dice: 1.0
+  class_weights: auto     # auto | null
