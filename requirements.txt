@@ -1,0 +1,9 @@
+numpy
+scipy
+pandas
+pyyaml
+pillow
+opencv-python
+scikit-image
+torch
+segmentation-models-pytorch
